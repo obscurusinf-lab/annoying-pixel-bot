@@ -1,11 +1,14 @@
 import asyncio
 import json
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import WebAppData
 from aiogram.filters import Command
 
-# Твой токен от @BotFather
-TOKEN = '8284715756:AAEU8tGISjN92w7oyPujur_rM9zJOfEar7U'
+# Токен из переменной окружения (без hardcoded)
+TOKEN = os.getenv('TOKEN')
+if not TOKEN:
+    raise ValueError("TOKEN environment variable not set")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -15,7 +18,7 @@ async def start(message: types.Message):
     await message.reply(
         "Welcome to Annoying Pixel!\nClick the button to play.",
         reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
-            [types.InlineKeyboardButton(text="Play Game", web_app=types.WebAppInfo(url="https://obscurusinf-lab.github.io/annoying_pixel/"))]
+            [types.InlineKeyboardButton(text="Play Game", web_app=types.WebAppInfo(url="YOUR_GAME_URL_HERE"))]
         ])
     )
 
@@ -24,7 +27,7 @@ async def play(message: types.Message):
     await message.reply(
         "Let's play!",
         reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
-            [types.InlineKeyboardButton(text="Start", web_app=types.WebAppInfo(url="https://obscurusinf-lab.github.io/annoying_pixel/"))]
+            [types.InlineKeyboardButton(text="Start", web_app=types.WebAppInfo(url="YOUR_GAME_URL_HERE"))]
         ])
     )
 
